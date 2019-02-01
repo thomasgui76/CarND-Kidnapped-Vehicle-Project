@@ -12,6 +12,7 @@
 #include <string>
 #include <vector>
 #include "helper_functions.h"
+using namespace std;
 
 struct Particle {
   int id;
@@ -101,6 +102,13 @@ class ParticleFilter {
   const bool initialized() const {
     return is_initialized;
   }
+
+  void vcl2MAP(const Particle& particle, const std::vector<LandmarkObs> & observations, std::vector<LandmarkObs> & observations_MAP);
+
+  void MAP2landmark(const Particle& particle,double sensor_range,const Map &map_landmarks,vector<LandmarkObs> & landmarks);
+
+  double multiv_prob(double sig_x, double sig_y, double x_obs, double y_obs,
+                   double mu_x, double mu_y);
 
   /**
    * Used for obtaining debugging information related to particles.
