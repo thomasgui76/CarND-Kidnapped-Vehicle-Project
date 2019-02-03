@@ -100,12 +100,20 @@ int main() {
           std::istream_iterator<float>(),
           std::back_inserter(y_sense));
 
-          for (int i = 0; i < x_sense.size(); ++i) {
+          for (unsigned int i = 0; i < x_sense.size(); ++i) {
             LandmarkObs obs;
             obs.x = x_sense[i];
             obs.y = y_sense[i];
             noisy_observations.push_back(obs);
           }
+
+          /*
+          // print observations
+          for (unsigned int i=0; i<noisy_observations.size(); ++i){
+             std::cout<<"noisy_observations["<<i<<"]: "<<noisy_observations[i].id<<", "<<noisy_observations[i].x
+             <<", "<<noisy_observations[i].y<<std::endl;
+          }
+          */
 
           // Update the weights and resample
           pf.updateWeights(sensor_range, sigma_landmark, noisy_observations, map);
